@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-
+from discord.ext.commands import MissingPermissions, CheckFailure
 import os
 import asyncio
 import random
@@ -60,8 +60,8 @@ async def admin(ctx):
 
 @admin.error
 async def admin_error(ctx, error):
-  if isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send("Sem cargo de Administrador")
+  if isinstance(error, CheckFailure):
+      await ctx.send("E muito poder pra ti")
 
 @client.command(name="say")
 @commands.has_permissions(administrator=True)
