@@ -41,7 +41,10 @@ client.remove_command("help")
 async def kick(ctx, member : discord.Member, *, reason=None):
   await member.kick(reason=reason)
 
-
+@client.command()
+async def clear(ctx, arg):
+  amount = int(arg) + 1
+  await ctx.channel.purge(limit=amount)
 @client.command()
 async def embedtest(ctx):
   embed=discord.Embed(title="Exemplo Embed", url="https://github.com/", description="E tu que dizes sobre isto? hum", color=0x9b42f5)
