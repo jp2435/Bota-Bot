@@ -37,6 +37,16 @@ async def on_ready():
 #Pra remover o comando padrão de help
 client.remove_command("help")
 
+@client.event
+async def on_command_error(ctx, error):
+  if isinstance(error, commands.CommandNotFound):
+    embed = discord.Embed(title="Notificação Importante", color=0xff0000)
+    embed.add_field(name="Tu deves ser é burro", value="Esse comando não existe")
+    embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+    resposta = "Enfim o que podemos fazer por ti {}, burro da piça".format(ctx.author)
+    embed.set_footer(text=resposta)
+    await ctx.send(embed=embed)
+
 
 @client.command()
 @commands.has_permissions(administrator=True)
