@@ -46,7 +46,10 @@ async def on_command_error(ctx, error):
     resposta = "Enfim o que podemos fazer por ti {}, burro da piça".format(ctx.author)
     embed.set_footer(text=resposta)
     await ctx.send(embed=embed)
-
+  if isinstance(error, CheckFailure):
+      await ctx.send("Isto é muito poder para ti")
+  if isinstance(error, commands.MissingRequiredArgument):
+    await ctx.send()
 
 @client.command()
 @commands.has_permissions(administrator=True)
@@ -61,7 +64,7 @@ async def admin(ctx):
 @admin.error
 async def admin_error(ctx, error):
   if isinstance(error, CheckFailure):
-      await ctx.send("E muito poder pra ti")
+      await ctx.send("Isto é muito poder para ti")
 
 @client.command(name="say")
 @commands.has_permissions(administrator=True)
