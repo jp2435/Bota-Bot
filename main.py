@@ -17,7 +17,7 @@ client = commands.Bot(command_prefix='--')
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.dnd)
+    await client.change_presence(status=discord.Status.dnd, activity=discord.Game(name="--vai-te encher cheio de moscas", type=1))
 
     print('We have logged in as {0.user}'.format(client))
 
@@ -37,14 +37,35 @@ async def on_ready():
 #Pra remover o comando padrão de help
 client.remove_command("help")
 
+
 @client.command()
+@commands.has_permissions(administrator=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
   await member.kick(reason=reason)
 
 @client.command()
+@commands.has_permissions(administrator=True)
+async def admin(ctx):
+  await ctx.send("é admin")
+
+
+@client.command(name="say")
+@commands.has_permissions(administrator=True)
+async def say(ctx, channel:discord.TextChannel, *msg):
+    message = " ".join(msg)
+    #Embed making
+    embed = discord.Embed(title="Notificação", color=discord.Color.dark_red())
+    embed.add_field(name="Nova mensagem de {}".format(ctx.message.author), value="{}".format(message))
+    embed.set_footer(text="{}".format(ctx.message.author))
+
+    await channel.send(embed=embed)
+
+@client.command()
 async def clear(ctx, arg):
   amount = int(arg) + 1
+  valor = int(arg)
   await ctx.channel.purge(limit=amount)
+
 @client.command()
 async def embedtest(ctx):
   embed=discord.Embed(title="Exemplo Embed", url="https://github.com/", description="E tu que dizes sobre isto? hum", color=0x9b42f5)
