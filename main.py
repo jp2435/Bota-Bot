@@ -48,6 +48,10 @@ async def kick(ctx, member : discord.Member, *, reason=None):
 async def admin(ctx):
   await ctx.send("é admin")
 
+@admin.error
+async def admin_error(ctx, error):
+  if isinstance(error, commands.MissingRequiredArgument):
+    await ctx.send("Sem cargo de Administrador")
 
 @client.command(name="say")
 @commands.has_permissions(administrator=True)
@@ -61,10 +65,16 @@ async def say(ctx, channel:discord.TextChannel, *msg):
     await channel.send(embed=embed)
 
 @client.command()
+@commands.has_permissions(administrator=True)
 async def clear(ctx, arg):
   amount = int(arg) + 1
   valor = int(arg)
   await ctx.channel.purge(limit=amount)
+
+@clear.error
+async def clear_error(ctx, error):
+  if isinstance(error, commands.MissingRequiredArgument):
+    await ctx.send("És burro ou quê CRLH!!!, preciso de números")
 
 @client.command()
 async def embedtest(ctx):
