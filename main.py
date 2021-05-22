@@ -49,12 +49,18 @@ async def on_command_error(ctx, error):
   if isinstance(error, CheckFailure):
       await ctx.send("Isto é muito poder para ti")
   if isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send()
+    await ctx.send("Oh burro, faltam argumentos para eu trabalhar!!!")
 
 @client.command()
 @commands.has_permissions(administrator=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
   await member.kick(reason=reason)
+
+@client.command()
+@commands.has_permissions(administrator=True)
+async def DM(ctx, user: discord.User, *, message=None):
+    message = message or "Oblá oh chouriço deves ser é tolinho"
+    await user.send(message)
 
 @client.command()
 @commands.has_permissions(administrator=True)
