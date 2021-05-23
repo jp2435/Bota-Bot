@@ -96,6 +96,10 @@ async def clear_error(ctx, error):
     await ctx.send("És burro ou quê CRLH!!!, preciso de números")
 
 @client.command()
+async def ping(ctx):
+    await ctx.send(f'My ping is {client.latency * 1000}!')
+
+@client.command()
 async def embedtest(ctx):
   embed=discord.Embed(title="Exemplo Embed", url="https://github.com/", description="E tu que dizes sobre isto? hum", color=0x9b42f5)
   embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
@@ -114,7 +118,22 @@ async def ded(ctx):
   
 @client.command()
 async def help(ctx):
-    await ctx.send("test, \nhelp")
+  embed=discord.Embed(title=" Lista de comandos", description="Todos os comandos que precisas", color=0xc0f03)
+  embed.set_author(name="Bota Bot", url="https://github.com/jp2435/Bota-Bot", url_icon="https://cdn.discordapp.com/attachments/790612398070300673/845689775565570058/bota_que_tem.png")
+  embed.add_field(name="--ping", value="Para retornar o ping do bot", inline=True)
+  embed.add_field(name="--clear <número>", value="Para eleminar um número de mensagens pedidas, só para **Administradores**", inline=True)
+  await ctx.send(embed=embed)
+
+@client.command()
+async def ajuda(ctx):
+  embed=discord.Embed(title="Lista de comandos", url="https://github.com/jp2435/Bota-Bot", description="Lista de comandos que precisas", color=0xc0f03)
+  embed.set_author(name="Bota Bot", icon_url="https://cdn.discordapp.com/attachments/790612398070300673/845689775565570058/bota_que_tem.png")
+  embed.set_thumbnail(url="https://images.pexels.com/photos/416322/pexels-photo-416322.jpeg")
+  embed.add_field(name="--ping", value="Para mostrar o ping do bot", inline=False) 
+  embed.add_field(name="--clear", value="Para limpar mensagens, só para Administradores", inline=True)
+  embed.add_field(name="Field 3 Title", value="It is inline with Field 2", inline=True)
+  embed.set_footer(text="Informação drámatica pedida por: {}".format(ctx.author.display_name))
+  await ctx.send(embed=embed)
 
 @client.command()
 async def test(ctx, arg):
@@ -124,7 +143,6 @@ async def test(ctx, arg):
 async def oqueémelhorque(ctx,arg):
     await ctx.send("O que é melhor que "+ arg)
     await ctx.send('CONA')
-
 
 #@client.event
 #async def on_member_join(member):
