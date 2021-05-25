@@ -11,15 +11,13 @@ my_secret = os.environ['TOKEN']
 infoclient = discord.Client()
 client = commands.Bot(command_prefix='--')
 
-#Inicio call
-
-#Fim call
 
 @client.event
 async def on_ready():
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game(name="--vai-te encher cheio de moscas", type=1))
 
     print('We have logged in as {0.user}'.format(client))
+    return
 
 #discord.Streaming(name="Como atropelar belhotas",  url="https://www.youtube.com/watch?v=dCgFVejm1-o")
 #await client.change_presence(status=discord.Status.dnd, activity=discord.Streaming(name="How to scam", url="https://www.twitch.tv/scam")) Streaming

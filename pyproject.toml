@@ -2,7 +2,7 @@
 name = "repl_python3_Bota-Bot"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["jp2435@github.com"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
